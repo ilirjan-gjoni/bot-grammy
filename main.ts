@@ -1,5 +1,6 @@
 // main.ts
 
+import "https://deno.land/std@0.224.0/dotenv/load.ts";
 
 import { webhookCallback } from "https://deno.land/x/grammy@v1.36.3/mod.ts";
 // You might modify this to the correct way to import your `Bot` object.
