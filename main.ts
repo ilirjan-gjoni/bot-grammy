@@ -1,5 +1,8 @@
 // main.ts
+
+
 import { webhookCallback } from "https://deno.land/x/grammy@v1.36.3/mod.ts";
+// You might modify this to the correct way to import your `Bot` object.
 import bot from "./bot.ts";
 
 const handleUpdate = webhookCallback(bot, "std/http");
@@ -12,10 +15,8 @@ Deno.serve(async (req) => {
         return await handleUpdate(req);
       } catch (err) {
         console.error(err);
-        return new Response("Error", { status: 500 });
       }
     }
   }
-
-  return new Response("OK");
+  return new Response();
 });
