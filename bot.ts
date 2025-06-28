@@ -7,6 +7,9 @@ bot.command("start", async (ctx) => {
     ? `@${ctx.from.username}`
     : ctx.from?.first_name || "there";
 
+  //  bot.command("start", async (ctx) => {
+  // const username = ctx.from?.first_name || "there"; 
+
   const keyboard = new InlineKeyboard().url(
     "Get BONUS!",
     "https://t.me/slotalarmcasinos_bot/slots"
