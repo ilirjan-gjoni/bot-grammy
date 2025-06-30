@@ -29,14 +29,20 @@ bot.command("start", async (ctx) => {
   });
 });
 
-// /broadcast command — sends a message to all saved users, including you
 bot.command("broadcast", async (ctx) => {
+  const kv = await Deno.openKv();
+
+  // Message text after /broadcast command
   const text = ctx.message?.text?.split(" ").slice(1).join(" ");
   if (!text) return ctx.reply("Please provide a message to send.");
 
-  const kv = await Deno.openKv();
-  const users = [];
+  // Inline button
+  const keyboard = new InlineKeyboard().url(
+    "Play Now!",
+    "https://t.me/slotalarmcasinos_bot/slots"
+  );
 
+  const users = [];
   for await (const entry of kv.list({ prefix: ["telegram_users"] })) {
     users.push(entry.value);
   }
@@ -46,7 +52,10 @@ bot.command("broadcast", async (ctx) => {
 
   for (const user of users) {
     try {
-      await ctx.api.sendMessage(user.id, text);
+      await ctx.api.sendPhoto(user.id, "https://crownslots.pro/img/bot.jpg", {
+        caption: text,
+        reply_markup: keyboard,
+      });
       success++;
     } catch (err) {
       console.error("Failed to send to", user.id, err);
@@ -56,6 +65,7 @@ bot.command("broadcast", async (ctx) => {
 
   await ctx.reply(`✅ Broadcast sent to ${success} users, ❌ ${failed} failed.`);
 });
+
 
 export default bot;
 
