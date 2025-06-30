@@ -52,7 +52,7 @@ bot.command("broadcast", async (ctx) => {
 
   for (const user of users) {
     try {
-      await ctx.api.sendPhoto(user.id, "https://crownslots.pro/img/bot.jpg", {
+      await ctx.api.sendPhoto(user.id, "https://crownslots.pro/img/bot2.png", {
         caption: text,
         reply_markup: keyboard,
       });
